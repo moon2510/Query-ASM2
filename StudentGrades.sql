@@ -10,29 +10,28 @@ CREATE TABLE Semesters
 	Part INT
 )
 
---Table2
+--Table4
 CREATE TABLE Class
 (
-	ID INT PRIMARY KEY IDENTITY,
-	Name VARCHAR(50)
+	ID INT PRIMARY KEY ,
+	MajorCode VARCHAR(3),
+        CONSTRAINT FK_Class_Major
+	FOREIGN KEY (MajorCode)
+	REFERENCES Majors(Code)
 )
 
 --Table3
 CREATE TABLE Majors
 (
-	ID INT PRIMARY KEY IDENTITY,
+	Code VARCHAR (3) PRIMARY KEY,
 	Name VARCHAR(50)
 )
 
---Table4
+--Table2
 CREATE TABLE Subjects
 (
 	ID INT PRIMARY KEY IDENTITY,
-	MajorID INT,
-	Name VARCHAR(50),
-	CONSTRAINT FK_Subject_Major
-	FOREIGN KEY (MajorID)
-	REFERENCES Majors(ID)
+	Name VARCHAR(50)
 )
 
 --Table5
@@ -118,12 +117,18 @@ VALUES
 ('Spring',2019,1),('Spring',2019,2),('Fall',2019,1),('Fall',2019,2),('Summer', 2019,1),('Summer', 2019, 2),
 ('Spring',2020,1),('Spring',2020,2),('Fall',2020,1),('Fall',2020,2),('Summer', 2020,1),('Summer', 2020, 2)
 
---Tb2
+--Tb4
 INSERT INTO dbo.Class
 (
-    Name
+    MajorCode, ID
 )
 VALUES
-( 'GED1945' ),( 'GED1946' ),( 'GED1947' ),( 'GED1948' ),( 'GCD0803' ),( 'GCD0805' ),( 'GCD0702' ),
-( 'GCD0705' ),( 'GCD0826' ),( 'GCD0821' ),( 'GCD0820 ),( 'GCD0815' ),( 'GCD0814' ),( 'GBD' ),
-( 'GBD0605' ),( 'GCD0602' ),( 'GCD0601' ),( 'GCD0603 ),( 'GCD0715' ),( 'GCD0714' ),( 'GCD1947' )
+( 'GED',1945 ),( 'GED',1946 ),( 'GED',1947 ),( 'GED',1948 ),( 'GCD',0803 ),( 'GCD',0804 ),( 'GCD,0805 ),
+( 'GCD',0806 ),( 'GCD',0807 ),( 'GCD',0820 ),( 'GBD',0715 ),( 'GBD',0716 ),( 'GBD',0717 ),( 'GBD',0718 ),
+( 'GBD',0719 ),( 'GBD',0720 )
+
+--Tb2
+INSERT INTO dbo.Subjects
+(
+    
+)
