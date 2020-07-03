@@ -10,40 +10,30 @@ CREATE TABLE Semesters
 	Part INT
 )
 
---Table4
-CREATE TABLE Class
-(
-	ID INT PRIMARY KEY ,
-	MajorCode VARCHAR(3),
-        CONSTRAINT FK_Class_Major
-	FOREIGN KEY (MajorCode)
-	REFERENCES Majors(Code)
-)
-
---Table3
-CREATE TABLE Majors
-(
-	Code VARCHAR (3) PRIMARY KEY,
-	Name VARCHAR(50)
-)
-
 --Table2
 CREATE TABLE Subjects
 (
-	ID INT PRIMARY KEY IDENTITY,
+	ID INT PRIMARY KEY ,
 	Name VARCHAR(50)
 )
 
---Table5
+--Table3
+CREATE TABLE Class
+(
+	ID INT PRIMARY KEY IDENTITY,
+	Name VARCHAR(15)
+)
+
+--Table 4
 CREATE TABLE Teacher
 (
 	ID INT PRIMARY KEY IDENTITY,
-	FullName VARCHAR(50),
+	FullName NVARCHAR(50),
 	DateOfbirth DATE,
 	Gender CHAR CHECK(Gender = 'F' OR Gender = 'M')
 )
 
---Table6
+--Table5
 CREATE TABLE Courses
 (
 	ID INT PRIMARY KEY IDENTITY,
@@ -61,11 +51,11 @@ CREATE TABLE Courses
 	FOREIGN KEY (SubjectID)
 	REFERENCES dbo.Subjects(ID),
 	CONSTRAINT FK_Teacher_Course
-	FOREIGN KEY (SubjectID)
+	FOREIGN KEY (TeacherID)
 	REFERENCES dbo.Teacher (ID)
 )
 
---Table7
+--Table6
 CREATE TABLE Students
 (
 	ID INT PRIMARY KEY IDENTITY,
@@ -76,7 +66,7 @@ CREATE TABLE Students
 	Gender CHAR CHECK(Gender = 'F' OR Gender = 'M')
 )
 
---Table8
+--Table7
 CREATE TABLE CourseStudent
 (
 	ID INT PRIMARY KEY IDENTITY,
@@ -90,7 +80,7 @@ CREATE TABLE CourseStudent
 	REFERENCES dbo.Students(ID)
 )
 
---Table9
+--Table8
 CREATE TABLE Grades
 (
 	ID INT PRIMARY KEY IDENTITY,
@@ -102,7 +92,12 @@ CREATE TABLE Grades
 	FOREIGN KEY (CourseStudentID)
 	REFERENCES dbo.CourseStudent(ID)
 )
-
+DROP TABLE dbo.Class
+DROP TABLE dbo.Grades
+DROP TABLE dbo.CourseStudent
+DROP TABLE dbo.Students
+DROP TABLE dbo.Courses
+DROP TABLE dbo.Teacher
 --Đổ dữ liệu :))
 
 
@@ -117,18 +112,56 @@ VALUES
 ('Spring',2019,1),('Spring',2019,2),('Fall',2019,1),('Fall',2019,2),('Summer', 2019,1),('Summer', 2019, 2),
 ('Spring',2020,1),('Spring',2020,2),('Fall',2020,1),('Fall',2020,2),('Summer', 2020,1),('Summer', 2020, 2)
 
---Tb4
-INSERT INTO dbo.Class
-(
-    MajorCode, ID
-)
-VALUES
-( 'GED',1945 ),( 'GED',1946 ),( 'GED',1947 ),( 'GED',1948 ),( 'GCD',0803 ),( 'GCD',0804 ),( 'GCD,0805 ),
-( 'GCD',0806 ),( 'GCD',0807 ),( 'GCD',0820 ),( 'GBD',0715 ),( 'GBD',0716 ),( 'GBD',0717 ),( 'GBD',0718 ),
-( 'GBD',0719 ),( 'GBD',0720 )
-
 --Tb2
 INSERT INTO dbo.Subjects
+(ID, Name)
+VALUES
+(1618,'Programming'),(1619,'Networking'),(1620,'Professional Practice'),(1622,'Database Design and Development'),
+(1623,'Security'),(1625,'Managing a Successful Computing Project'),(1631,'Software Development Life Cycle'),
+(485,'Business and the Business Environment'),(486,'Marketing Essentials'),(487,'Human Resource Management'),
+(489,'Management Accounting'),(3532,'Printmaking'),(3515,'Techniques & Processes'),(3524,'Typography')
+
+--Tb3
+INSERT INTO dbo.Class
 (
-    
+    Name
 )
+VALUES
+( 'GCD1945' ),( 'GCD1946' ),( 'GCD1947' ),( 'GCD1948' ),( 'GCD0803' ),( 'GCD0805' ),( 'GCD0702' ),
+( 'GCD0705' ),( 'GCD0826' ),( 'GCD0815' ),( 'GBD0814' ),( 'GBD0816' ),( 'GBD0605' ),( 'GBD0602' ),
+( 'GBD0601' ),( 'GBD0603' ),( 'GBD0715' )
+
+--Tb4
+INSERT INTO dbo.Teacher
+(
+    --ID - column value is auto-generated
+    FullName,
+    DateOfbirth,
+    Gender
+)
+VALUES
+(N'Nguyễn Lâm ','4/14/1986','M'),(N'Võ Văn Việt','8/15/1981','M'),(N'Bùi  Minh Quang','10/25/1988','M'),
+(N'Trần Thành Đạt','7/22/1985','M'),(N'Nguyễn Thùy Trang','6/30/1992','F'),(N'Trần Thanh Thảo','2/18/1990','F'),
+(N'Hoàng Quang Trung','10/26/1991','M'),(N'Lê Phương Duyên','7/22/1989','F'),(N'Nguyễn Minh Hiếu','8/9/1985','M'),
+(N'Nguyễn Hoàng Lâm','3/9/1986','M')
+--ALTER TABLE dbo.Teacher
+--ALTER COLUMN FullName NVARCHAR(30)
+
+--Tb6
+INSERT INTO dbo.Courses
+(
+    --ID - column value is auto-generated
+    SemesterID,
+    ClassID,
+    SubjectID,
+    TeacherID
+)
+VALUES
+(
+    -- ID - INT
+    0, -- SemesterID - INT
+    0, -- ClassID - INT
+    0, -- SubjectID - INT
+    0 -- TeacherID - INT
+)
+
