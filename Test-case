@@ -1,0 +1,32 @@
+--Cực đoan hóa dữ liệu
+DROP TABLE Semesters --(DROP méo được đâu (PASS))
+DELETE Subjects WHERE ID = 1618 --(Xóa méo được đâu (PASS))
+
+INSERT INTO dbo.Teacher --(Chắc chắn insert được (PASS))
+(
+    --ID - column value is auto-generated
+    FullName,
+    DateOfbirth,
+    Gender
+)
+VALUES
+(N'Eris Emilys','02/14/1969','M'),
+
+UPDATE dbo.Teacher --(Update được thì PASS)
+SET
+    dbo.Teacher.FullName = N'Bùi Xuân Huấn', 
+    dbo.Teacher.DateOfbirth = '10/05/1969' ,
+    dbo.Teacher.Gender = 'M'
+WHERE ID = 10;
+
+DELETE Teacher WHERE ID = 10; --(Nếu xóa được là PASS)
+
+UPDATE dbo.Teacher --(Update không được thì PASS)
+SET
+    dbo.Teacher.FullName = N'Bùi Xuân Huấn', 
+    dbo.Teacher.DateOfbirth = '10/05/1969' ,
+    dbo.Teacher.Gender = 'M'
+WHERE ID = 11;
+
+
+
